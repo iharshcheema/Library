@@ -2,10 +2,13 @@ import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import {
+  Box,
   Button,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Image,
   Input,
   Select,
   VStack,
@@ -14,6 +17,10 @@ import Admin from './Admin'
 import Student from './Student'
 import Teacher from './Teacher'
 import Librarian from './Librarian'
+import backgroundImage from '../assets/bg.jpeg'
+import logo from '../assets/logo.png'
+
+
 
 const Login = () => {
   const [userType, setUserType] = useState(null)
@@ -85,56 +92,115 @@ const Login = () => {
         </div>
       ) : (
         <div>
-          <VStack spacing="4">
-            <h1>Login</h1>
-            <form onSubmit={formik.handleSubmit}>
-              <VStack>
-                <FormControl>
-                  <FormLabel htmlFor="userType">Select User Type</FormLabel>
-                  <Select
-                    id="userType"
-                    name="userType"
-                    value={selectedUserType}
-                    onChange={(e) => setSelectedUserType(e.target.value)}
-                  >
-                    <option value="">Select User Type</option>
-                    <option value="admin">Admin</option>
-                    <option value="student">Student</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="librarian">Librarian</option>
-                  </Select>
-                </FormControl>
-                <FormControl
-                  isInvalid={formik.touched.username && formik.errors.username}
-                >
-                  <FormLabel htmlFor="username">Username</FormLabel>
-                  <Input
-                    id="username"
-                    name="username"
-                    type="text"
-                    value={formik.values.username}
-                    onChange={formik.handleChange}
-                  />
-                  <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
-                </FormControl>
-                <FormControl
-                  isInvalid={formik.touched.password && formik.errors.password}
-                >
-                  <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input
-                    id="password"
-                    name="password"
-                    type="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                  />
-                  <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
-                </FormControl>
+          <Flex
+            width="100vw"
+            height="100vh"
+            alignItems="center"
+            justifyContent="center"
+            bgImage={`url(${backgroundImage})`}
+            bgSize="cover"
+          >
+            <Box
+              p={8}
+              maxWidth="400px"
+              width="100%"
+              borderRadius={8}
+              bg="RGBA(0, 0, 0, 0.36)"
+            >
+              <VStack spacing="4">
+                <Image
+                  boxSize="100px"
+                  objectFit="contain"
+                  src={logo}
+                  alt="Logo"
+                />
 
-                <Button type="submit">Log In</Button>
+                <form onSubmit={formik.handleSubmit}>
+                  <VStack>
+                    <FormControl>
+                      <FormLabel
+                        htmlFor="userType"
+                        color="RGBA(255, 255, 255, 0.80)"
+                      >
+                        Select User Type
+                      </FormLabel>
+                      <Select
+                        id="userType"
+                        name="userType"
+                        variant="outline"
+                        mb={4}
+                        bg="RGBA(255, 255, 255, 0.80)"
+                        value={selectedUserType}
+                        onChange={(e) => setSelectedUserType(e.target.value)}
+                      >
+                        <option value="">Select User Type</option>
+                        <option value="admin">Admin</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="librarian">Librarian</option>
+                      </Select>
+                    </FormControl>
+                    <FormControl
+                      isInvalid={
+                        formik.touched.username && formik.errors.username
+                      }
+                    >
+                      <FormLabel
+                        htmlFor="username"
+                        color="RGBA(255, 255, 255, 0.80)"
+                      >
+                        Username
+                      </FormLabel>
+                      <Input
+                        id="username"
+                        name="username"
+                        type="text"
+                        value={formik.values.username}
+                        onChange={formik.handleChange}
+                        placeholder="Username"
+                        variant="outline"
+                        mb={4}
+                        bg="RGBA(255, 255, 255, 0.80)"
+                      />
+                      <FormErrorMessage>
+                        {formik.errors.username}
+                      </FormErrorMessage>
+                    </FormControl>
+                    <FormControl
+                      isInvalid={
+                        formik.touched.password && formik.errors.password
+                      }
+                    >
+                      <FormLabel
+                        htmlFor="password"
+                        color="RGBA(255, 255, 255, 0.80)"
+                      >
+                        Password
+                      </FormLabel>
+                      <Input
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        placeholder="Password"
+                        variant="outline"
+                        mb={4}
+                        bg="RGBA(255, 255, 255, 0.80)"
+                      />
+                      <FormErrorMessage>
+                        {formik.errors.password}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <Button type="submit" size={'md'} colorScheme="red">
+                      Log In
+                    </Button>
+                  </VStack>
+                </form>
               </VStack>
-            </form>
-          </VStack>
+            </Box>
+          </Flex>
         </div>
       )}
     </div>

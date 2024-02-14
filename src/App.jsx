@@ -8,9 +8,7 @@ import Login from './components/Login'
 function App() {
   return (
     <>
-    
       <Routes>
-        
         <Route path="/login" element={<Login />} />
         <Route path="/student" element={<Student />} />
         <Route path="/teacher" element={<Teacher />} />
