@@ -19,7 +19,16 @@ const UserSchema = new mongoose.Schema({
         enum: ['admin', 'student', 'teacher'], // Enum for roles
         default: 'admin'
     },
+    email: {
+        type: String,
+        required: true
+    },
+    booksBorrowed: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'BookSchema'
+    },
 
+    //payment due (kitni hai aur last din)
 });
 
 module.exports = mongoose.model('user', UserSchema);
